@@ -28,18 +28,18 @@
     <h1>Transaction Area</h1>
    <div class="row"> <div class="col-md-4 ">
     <div class="deposite status"><h5>DEposite</h5>
-        <h2>$00</h2></div>
+        <h2>$ <span id="currentDeposite">00</span></h2></div>
 </div>
 <div class="col-md-4 ">
     <div class="withdraw status">
         <h5>Withdraw</h5>
-    <h2>$00</h2>
+    <h2>$<span id="currentwithdraw">00</span></h2>
     </div>
 </div>
 <div class="col-md-4 ">
    <div class="final status">
     <h5>Final</h5>
-    <h2>$1200</h2>
+    <h2>$ <span id="finalBalance">1200</span></h2>
    </div>
 </div></div>
 <div class="row">
@@ -53,8 +53,8 @@
     <div class="col-md-6">
        
 <div class="submit-area"><h2>Withdraw</h2>
-    <input class="form-control" placeholder="amount" type="number">
-    <button id="withdrawan" class="btn btn-success">Withdraw</button></div>
+    <input id="withdrawamount" class="form-control" placeholder="amount" type="number">
+    <button id="withdrawn" class="btn btn-success">Withdraw</button></div>
         
     </div>
 </div>
@@ -73,15 +73,46 @@ transactionarea.style.display="block";
 })
 
 const adddeposite= document.getElementById("depositeadd");
-addEventListener.addEventListener("click",function(){
+adddeposite.addEventListener("click",function(){
 
 const depositeAmmount= document.getElementById("depositeammount").value;
+const depositenumber=parseFloat(depositeAmmount);
 
 
+transform("currentDeposite",depositenumber);
+
+
+
+
+transform("finalBalance",depositenumber);
+
+
+document.getElementById("depositeammount").value="";
 
 })
 
+const withdraw = document.getElementById("withdrawn");
+withdraw.addEventListener("click",function(){
+   
+   const withdrawmoney = document.getElementById("withdrawamount").value;
+    const withdrawamount = parseFloat(withdrawmoney);
+
+
+transform("finalBalance",-1*withdrawamount);
+transform("currentwithdraw",withdrawamount);
+document.getElementById("withdrawamount").value="";
+
 })
+function transform(id,depositenumber){
+    const finalBalance = document.getElementById(id).innerText;
+const finalbalancenumber = parseFloat(finalBalance);
+const finalupdate = finalbalancenumber + depositenumber;
+document.getElementById(id).innerText = finalupdate ;
+
+}
+
+
+
 </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
